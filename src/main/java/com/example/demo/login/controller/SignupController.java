@@ -3,6 +3,7 @@ package com.example.demo.login.controller;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,9 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.domain.model.GroupOrder;
 import com.example.demo.login.domain.model.SignupForm;
+import com.example.demo.login.domain.service.UserService;
 
 @Controller
 public class SignupController {
+	@Autowired
+	private UserService userService;
+
 	private Map<String, String> radioMarriage;
 
 	private Map<String, String> initRadioMarriage() {
