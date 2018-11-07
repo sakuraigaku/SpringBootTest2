@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.domain.model.GroupOrder;
 import com.example.demo.login.domain.model.SignupForm;
+import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.service.UserService;
 
 @Controller
@@ -43,6 +44,25 @@ public class SignupController {
 			return getSignUp(form, model);
 		}
 		System.out.println(form);
+
+		User user =new User();
+
+		user.setUserId(form.getUserId());
+		user.setPassword(form.getPassword());
+		user.setUserName(form.getUserName());
+		user.setBirthday(form.getBirthday());
+		user.setAge(form.getAge());
+		user.setMarriage(form.isMarriage());
+		user.setRole("ROLE_GENERAL");
+
+		boolean result=userService.insert(user);
+
+		if (result==true) {
+			System.out.println("insert成功");
+		} else {
+			System.out.println("insert失敗");
+		}
+
 		return "redirect:/login";
 	}
 }
