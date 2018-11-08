@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
-@Repository
+@Repository("UserDaoJdbcImpl")
 public class UserDaoJdbcImpl implements UserDao {
 	@Autowired
 	JdbcTemplate jdbc;
@@ -33,7 +33,7 @@ public class UserDaoJdbcImpl implements UserDao {
 				+ "age,"
 				+ "marriage,"
 				+ "role)"
-				+ "values(?,?,?,?,?,?)"
+				+ "values(?,?,?,?,?,?,?)"
 				,user.getUserId()
 				,user.getPassword()
 				,user.getUserName()
@@ -99,7 +99,8 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@Override
 	public int deleteOne(String userId) throws DataAccessException {
-		return 0;
+		int rowNumber=jdbc.update("delete from m_user where user_id=?",userId);
+		return rowNumber;
 	}
 
 	@Override
