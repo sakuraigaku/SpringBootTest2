@@ -56,7 +56,7 @@ public class UserDaoNamedJdbcImpl implements UserDao {
 
 	@Override
 	public User selectOne(String userId) throws DataAccessException {
-		String sql="select * from m_user where user_id=:user_id";
+		String sql="select * from m_user where user_id=:userId";
 		SqlParameterSource params=new MapSqlParameterSource()
 				.addValue("userId", userId);
 		Map<String, Object>map=jdbc.queryForMap(sql, params);
